@@ -1,0 +1,183 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.5, pytest-9.0.1, pluggy-1.6.0 -- C:\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Bala - workspace\Projects\BRO\bro-website\backend
+configfile: pyproject.toml
+plugins: anyio-4.10.0, asyncio-1.3.0, cov-7.0.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 0 items / 1 error
+
+=================================== ERRORS ====================================
+_________________ ERROR collecting app/tests/test_logging.py __________________
+ImportError while importing test module 'D:\Bala - workspace\Projects\BRO\bro-website\backend\app\tests\test_logging.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\Hp\AppData\Roaming\Python\Python312\site-packages\_pytest\python.py:507: in importtestmodule
+    mod = import_path(
+C:\Users\Hp\AppData\Roaming\Python\Python312\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\Hp\AppData\Roaming\Python\Python312\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+app\tests\test_logging.py:5: in <module>
+    from app.main import app
+app\main.py:15: in <module>
+    setup_logging()
+app\core\logging.py:70: in setup_logging
+    db_handler = DBHandler()
+                 ^^^^^^^^^^^
+app\core\logging.py:13: in __init__
+    self.engine = create_engine(settings.SQLALCHEMY_DATABASE_URI_SYNC)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:2: in create_engine
+    ???
+C:\Users\Hp\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\deprecations.py:281: in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\Hp\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\create.py:617: in create_engine
+    dbapi = dbapi_meth(**dbapi_args)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Hp\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\dialects\postgresql\psycopg2.py:696: in import_dbapi
+    import psycopg2
+E   ModuleNotFoundError: No module named 'psycopg2'
+============================== warnings summary ===============================
+app\core\config.py:18
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\core\config.py:18: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    @validator("BACKEND_CORS_ORIGINS", pre=True)
+
+app\core\config.py:34
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\core\config.py:34: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    @validator("SQLALCHEMY_DATABASE_URI", pre=True)
+
+app\core\config.py:5
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\core\config.py:5: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Settings(BaseSettings):
+
+app\schemas\user.py:16
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\user.py:16: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class UserInDBBase(UserBase):
+
+C:\Users\Hp\AppData\Roaming\Python\Python312\site-packages\pydantic\_internal\_config.py:383
+  C:\Users\Hp\AppData\Roaming\Python\Python312\site-packages\pydantic\_internal\_config.py:383: UserWarning: Valid config keys have changed in V2:
+  * 'orm_mode' has been renamed to 'from_attributes'
+    warnings.warn(message, UserWarning)
+
+app\schemas\property.py:22
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\property.py:22: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class SEOMetadata(SEOMetadataBase):
+
+app\schemas\property.py:48
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\property.py:48: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Destination(DestinationBase):
+
+app\schemas\property.py:78
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\property.py:78: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Property(PropertyBase):
+
+app\schemas\property.py:107
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\property.py:107: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class RoomType(RoomTypeBase):
+
+app\schemas\property.py:129
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\property.py:129: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Room(RoomBase):
+
+app\schemas\property.py:153
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\property.py:153: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class RoomInventory(RoomInventoryBase):
+
+app\schemas\property.py:177
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\property.py:177: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class RoomTariff(RoomTariffBase):
+
+app\schemas\booking.py:22
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\booking.py:22: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class BookingItem(BookingItemBase):
+
+app\schemas\booking.py:49
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\booking.py:49: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class BookingAddon(BookingAddonBase):
+
+app\schemas\booking.py:76
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\booking.py:76: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Payment(PaymentBase):
+
+app\schemas\booking.py:105
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\booking.py:105: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Booking(BookingBase):
+
+app\schemas\media.py:26
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\media.py:26: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Media(MediaBase):
+
+app\schemas\media.py:52
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\media.py:52: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class EntityMedia(EntityMediaBase):
+
+app\schemas\amenity.py:21
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\amenity.py:21: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class AmenityOption(AmenityOptionBase):
+
+app\schemas\amenity.py:49
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\amenity.py:49: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Amenity(AmenityBase):
+
+app\schemas\amenity.py:74
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\amenity.py:74: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class PropertyAmenity(PropertyAmenityBase):
+
+app\schemas\policy.py:20
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\policy.py:20: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Policy(PolicyBase):
+
+app\schemas\policy.py:43
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\policy.py:43: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class PropertyPolicy(PropertyPolicyBase):
+
+app\schemas\package.py:19
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\package.py:19: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class PackageItem(PackageItemBase):
+
+app\schemas\package.py:44
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\package.py:44: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Package(PackageBase):
+
+app\schemas\package.py:66
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\package.py:66: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class ItineraryDay(ItineraryDayBase):
+
+app\schemas\package.py:87
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\package.py:87: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Itinerary(ItineraryBase):
+
+app\schemas\review.py:21
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\review.py:21: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Review(ReviewBase):
+
+app\schemas\offer.py:23
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\offer.py:23: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Offer(OfferBase):
+
+app\schemas\audit.py:17
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\audit.py:17: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class AuditLog(AuditLogBase):
+
+app\schemas\audit.py:35
+  D:\Bala - workspace\Projects\BRO\bro-website\backend\app\schemas\audit.py:35: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class ActivityLog(ActivityLogBase):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+ERROR app/tests/test_logging.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+======================== 31 warnings, 1 error in 4.59s ========================
