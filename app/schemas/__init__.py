@@ -5,7 +5,10 @@ from .property import (
     RoomType, RoomTypeCreate, RoomTypeUpdate,
     Room, RoomCreate, RoomUpdate,
     RoomInventory, RoomInventoryCreate, RoomInventoryUpdate,
-    RoomTariff, RoomTariffCreate, RoomTariffUpdate
+    RoomTariff, RoomTariffCreate, RoomTariffUpdate,
+    PropertyAssignment, PropertyAssignmentCreate, PropertyAssignmentUpdate,
+    NearbyPlace, NearbyPlaceCreate, NearbyPlaceUpdate,
+    PropertyPublicDetail
 )
 from .booking import (
     Booking, BookingCreate, BookingUpdate,
@@ -13,7 +16,12 @@ from .booking import (
     Payment, PaymentCreate, PaymentUpdate,
     BookingAddon, BookingAddonCreate, BookingAddonUpdate
 )
-from .media import Media, MediaCreate, MediaUpdate, EntityMedia, EntityMediaCreate, EntityMediaUpdate
+from .media import (
+    Media, MediaCreate, MediaUpdate, 
+    EntityMedia, EntityMediaCreate, EntityMediaUpdate,
+    MediaPresign, MediaPresignResponse, MediaComplete
+)
+from .invitation import InvitationCreate, InvitationResponse, InvitationAccept
 from .amenity import (
     Amenity, AmenityCreate, AmenityUpdate,
     AmenityOption, AmenityOptionCreate, AmenityOptionUpdate,

@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.endpoints import auth, users, properties, bookings, amenities, policies, destinations, cms, public
+from app.api.endpoints import auth, users, properties, bookings, amenities, policies, destinations, cms, public, invites, media
 
 api_router = APIRouter()
 
@@ -12,3 +12,5 @@ api_router.include_router(policies.router, prefix="/policies", tags=["policies"]
 api_router.include_router(destinations.router, prefix="/destinations", tags=["destinations"])
 api_router.include_router(cms.router, prefix="/cms", tags=["cms"])
 api_router.include_router(public.router, prefix="/public", tags=["public"])
+api_router.include_router(invites.router, prefix="/invites", tags=["invites"])
+api_router.include_router(media.router, prefix="/media", tags=["media"])

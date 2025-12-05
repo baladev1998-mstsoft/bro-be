@@ -13,7 +13,7 @@ from app.models.policy import Policy, PropertyPolicy
 from app.models.package import Package, PackageItem, Itinerary, ItineraryDay
 from app.models.review import Review
 from app.models.offer import Offer
-from app.models.offer import Offer
+from app.models.cms import CMSPage, CMSPageTranslation, CMSSection, CMSSectionContent, CMSPageVersion
 from app.models.audit import AuditLog, ActivityLog
 from app.models.log import Log
 from sqlalchemy.orm import configure_mappers

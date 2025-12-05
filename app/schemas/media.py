@@ -33,6 +33,24 @@ class Media(MediaBase):
     class Config:
         from_attributes = True
 
+class MediaPresign(BaseModel):
+    file_name: str
+    content_type: str
+    size_bytes: int
+
+class MediaPresignResponse(BaseModel):
+    upload_url: str
+    s3_key: str
+    media_id: Optional[UUID] = None
+
+class MediaComplete(BaseModel):
+    s3_key: str
+    file_name: str
+    content_type: str
+    size_bytes: Optional[int] = None
+    width: Optional[int] = None
+    height: Optional[int] = None
+
 # Entity Media Schemas
 class EntityMediaBase(BaseModel):
     entity_type: str

@@ -67,6 +67,25 @@ class PropertyBase(BaseModel):
     overview: Optional[str] = None
     rating: Optional[float] = 0.0
     is_published: Optional[bool] = False
+    
+    # New fields
+    short_title: Optional[str] = None
+    starting_price: Optional[float] = None
+    recommended_days: Optional[int] = None
+    recommended_nights: Optional[int] = None
+    min_nights: Optional[int] = None
+    max_nights: Optional[int] = None
+    min_guests: Optional[int] = None
+    max_guests: Optional[int] = None
+    about: Optional[str] = None
+    map_url: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    city: Optional[str] = None
+    state: Optional[str] = None
+    postal_code: Optional[str] = None
+    website_url: Optional[str] = None
+    property_meta: Optional[Dict[str, Any]] = {}
 
 class PropertyCreate(PropertyBase):
     destination_id: Optional[UUID] = None
@@ -84,7 +103,37 @@ class Property(PropertyBase):
     created_by: Optional[UUID] = None
     updated_by: Optional[UUID] = None
     destination: Optional[Destination] = None
+    
+    reviews_count: Optional[int] = 0
+    registration_status: Optional[str] = "draft"
+    registration_submitted_by: Optional[UUID] = None
+    registration_submitted_at: Optional[date] = None
 
+    class Config:
+        from_attributes = True
+
+# Property Assignment Schemas
+class PropertyAssignmentBase(BaseModel):
+    user_id: UUID
+    assignment_role: str
+    scope: Optional[Dict[str, Any]] = {}
+    is_active: bool = True
+    notes: Optional[str] = None
+
+class PropertyAssignmentCreate(PropertyAssignmentBase):
+    pass
+
+class PropertyAssignmentUpdate(PropertyAssignmentBase):
+    pass
+
+class PropertyAssignment(PropertyAssignmentBase):
+    id: UUID
+    property_id: UUID
+    assigned_by: Optional[UUID] = None
+    assigned_at: Optional[datetime] = None
+    revoked_by: Optional[UUID] = None
+    revoked_at: Optional[date] = None
+    
     class Config:
         from_attributes = True
 
@@ -160,6 +209,29 @@ class RoomInventory(RoomInventoryBase):
     class Config:
         from_attributes = True
 
+# Nearby Place Schemas
+class NearbyPlaceBase(BaseModel):
+    name: str
+    description: Optional[str] = None
+    distance_km: Optional[float] = None
+    order_index: Optional[int] = 0
+
+class NearbyPlaceCreate(NearbyPlaceBase):
+    property_id: UUID
+    media_id: Optional[UUID] = None
+
+class NearbyPlaceUpdate(NearbyPlaceBase):
+    media_id: Optional[UUID] = None
+
+class NearbyPlace(NearbyPlaceBase):
+    id: UUID
+    property_id: UUID
+    media_id: Optional[UUID] = None
+    created_at: Optional[date] = None
+    
+    class Config:
+        from_attributes = True
+
 # Tariff Schemas
 class RoomTariffBase(BaseModel):
     tariff_date: date
@@ -180,6 +252,47 @@ class RoomTariff(RoomTariffBase):
     created_by: Optional[UUID] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
+
+    class Config:
+        from_attributes = True
+
+# Public API Schemas
+class AmenityPublic(BaseModel):
+    id: UUID
+    image: Optional[str] = None
+    number: Optional[int] = None
+    label: str
+
+class NearbyPlacePublic(BaseModel):
+    id: UUID
+    image: Optional[str] = None
+    name: str
+    description: Optional[str] = None
+
+class RulePublic(BaseModel):
+    header: str
+    description: Optional[str] = None
+
+class PropertyPublicDetail(BaseModel):
+    id: UUID
+    title: str
+    description: Optional[str] = None
+    price: Optional[str] = None
+    rating: Optional[str] = None
+    reviews: Optional[str] = None
+    days: Optional[int] = None
+    nights: Optional[int] = None
+    guests: Optional[str] = None
+    location: Optional[str] = None
+    property_image: Optional[str] = None
+    images: List[str] = []
+    about: Optional[str] = None
+    amenities: List[AmenityPublic] = []
+    map_location: Optional[str] = None
+    nearby_attractions: List[NearbyPlacePublic] = []
+    rules: List[RulePublic] = []
+    page_route: str
+    suggestions: Optional[str] = None
 
     class Config:
         from_attributes = True

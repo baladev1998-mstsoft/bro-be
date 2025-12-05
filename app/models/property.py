@@ -1,5 +1,6 @@
 import uuid
-from sqlalchemy import Column, String, Boolean, ForeignKey, Numeric, Integer, Date, UniqueConstraint, Text
+import enum
+from sqlalchemy import Column, String, Boolean, ForeignKey, Numeric, Integer, Date, UniqueConstraint, Text, DateTime
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import relationship
 from app.models.base import Base
@@ -67,6 +68,29 @@ class Property(Base):
     created_by = Column(UUID(as_uuid=True))
     updated_by = Column(UUID(as_uuid=True))
 
+    # New columns
+    short_title = Column(String)
+    starting_price = Column(Numeric(12, 2))
+    recommended_days = Column(Integer)
+    recommended_nights = Column(Integer)
+    min_nights = Column(Integer)
+    max_nights = Column(Integer)
+    min_guests = Column(Integer)
+    max_guests = Column(Integer)
+    about = Column(Text)
+    map_url = Column(Text)
+    latitude = Column(Numeric(9, 6))
+    longitude = Column(Numeric(9, 6))
+    city = Column(String)
+    state = Column(String)
+    postal_code = Column(String)
+    website_url = Column(String)
+    reviews_count = Column(Integer, default=0)
+    registration_status = Column(String, default='draft') # Enum PropertyRegistrationStatus
+    registration_submitted_by = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"))
+    registration_submitted_at = Column(Date) # Should be DateTime
+    property_meta = Column(JSONB, default={})
+
     destination = relationship("Destination", back_populates="properties")
     assignments = relationship("PropertyAssignment", back_populates="property")
     room_types = relationship("RoomType", back_populates="property")
@@ -75,6 +99,13 @@ class Property(Base):
     property_policies = relationship("PropertyPolicy", back_populates="property")
     reviews = relationship("Review", back_populates="property")
     bookings = relationship("Booking", back_populates="property")
+    nearby_places = relationship("NearbyPlace", back_populates="property")
+
+class PropertyRegistrationStatus(str, enum.Enum):
+    DRAFT = "draft"
+    PENDING_REVIEW = "pending_review"
+    APPROVED = "approved"
+    REJECTED = "rejected"
 
 class PropertyAssignment(Base):
     __tablename__ = "property_assignments"
@@ -168,3 +199,18 @@ class BlackoutDate(Base):
     reason = Column(Text)
 
     room_type = relationship("RoomType", back_populates="blackout_dates")
+
+class NearbyPlace(Base):
+    __tablename__ = "nearby_places"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    property_id = Column(UUID(as_uuid=True), ForeignKey("properties.id", ondelete="CASCADE"), nullable=False)
+    name = Column(String, nullable=False)
+    description = Column(Text)
+    media_id = Column(UUID(as_uuid=True), ForeignKey("media.id", ondelete="SET NULL"))
+    distance_km = Column(Numeric(6, 2))
+    order_index = Column(Integer, default=0)
+    created_at = Column(Date, default=uuid.uuid4) # Placeholder, should be DateTime
+
+    property = relationship("Property", back_populates="nearby_places")
+    media = relationship("Media")

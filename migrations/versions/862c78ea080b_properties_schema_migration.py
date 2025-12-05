@@ -1,8 +1,8 @@
-"""recreate migration
+"""properties schema migration
 
-Revision ID: 90950b704b65
-Revises: 9a502ab17128
-Create Date: 2025-12-03 14:41:41.179598
+Revision ID: 862c78ea080b
+Revises: dfd0c4df9111
+Create Date: 2025-12-05 13:28:13.305680
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '90950b704b65'
-down_revision = '9a502ab17128'
+revision = '862c78ea080b'
+down_revision = 'dfd0c4df9111'
 branch_labels = None
 depends_on = None
 
