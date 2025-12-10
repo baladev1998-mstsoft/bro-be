@@ -72,13 +72,10 @@ def upgrade() -> None:
     op.add_column('properties', sa.Column('registration_submitted_by', sa.UUID(), nullable=True))
     op.add_column('properties', sa.Column('registration_submitted_at', sa.Date(), nullable=True))
     op.add_column('properties', sa.Column('property_meta', postgresql.JSONB(astext_type=sa.Text()), nullable=True))
-    op.alter_column('properties', 'map_url',
-               existing_type=sa.VARCHAR(),
-               type_=sa.Text(),
-               existing_nullable=True)
+    op.add_column('properties', sa.Column('map_url', sa.Text(), nullable=True))
     op.create_foreign_key(None, 'properties', 'users', ['registration_submitted_by'], ['id'], ondelete='SET NULL')
-    op.drop_column('properties', 'meta')
-    op.drop_column('properties', 'guest_range')
+    # op.drop_column('properties', 'meta')
+    # op.drop_column('properties', 'guest_range')
     # ### end Alembic commands ###
 
 

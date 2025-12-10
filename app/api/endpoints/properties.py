@@ -36,6 +36,11 @@ async def register_property(
     await db.commit()
     await db.refresh(db_obj)
     
+    # Re-fetch with destination loaded to avoid Greenlet error
+    query = select(models.Property).options(selectinload(models.Property.destination).selectinload(models.Destination.seo)).where(models.Property.id == db_obj.id)
+    result = await db.execute(query)
+    db_obj = result.scalars().first()
+    
     # Assign current user as PROPERTY_ADMIN
     assignment = models.PropertyAssignment(
         property_id=db_obj.id,
@@ -62,7 +67,7 @@ async def update_property(
     current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
     # Check permissions (omitted for brevity, assume property_admin or system_admin)
-    result = await db.execute(select(models.Property).where(models.Property.id == property_id))
+    result = await db.execute(select(models.Property).options(selectinload(models.Property.destination).selectinload(models.Destination.seo)).where(models.Property.id == property_id))
     property = result.scalars().first()
     if not property:
         raise HTTPException(status_code=404, detail="Property not found")
@@ -90,7 +95,7 @@ async def submit_for_review(
     property_id: UUID,
     current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
-    result = await db.execute(select(models.Property).where(models.Property.id == property_id))
+    result = await db.execute(select(models.Property).options(selectinload(models.Property.destination).selectinload(models.Destination.seo)).where(models.Property.id == property_id))
     property = result.scalars().first()
     if not property:
         raise HTTPException(status_code=404, detail="Property not found")
@@ -117,7 +122,7 @@ async def review_property(
     note: Optional[str] = None,
     current_user: models.User = Depends(deps.get_current_active_user), # Should be SYSTEM_ADMIN
 ) -> Any:
-    result = await db.execute(select(models.Property).where(models.Property.id == property_id))
+    result = await db.execute(select(models.Property).options(selectinload(models.Property.destination).selectinload(models.Destination.seo)).where(models.Property.id == property_id))
     property = result.scalars().first()
     if not property:
         raise HTTPException(status_code=404, detail="Property not found")
@@ -145,7 +150,7 @@ async def publish_property(
     property_id: UUID,
     current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
-    result = await db.execute(select(models.Property).where(models.Property.id == property_id))
+    result = await db.execute(select(models.Property).options(selectinload(models.Property.destination).selectinload(models.Destination.seo)).where(models.Property.id == property_id))
     property = result.scalars().first()
     if not property:
         raise HTTPException(status_code=404, detail="Property not found")
@@ -412,6 +417,11 @@ async def update_property_amenity(
         
     await db.commit()
     await db.refresh(prop_amenity)
+    
+    # Re-fetch with amenity loaded
+    result = await db.execute(select(models.PropertyAmenity).options(selectinload(models.PropertyAmenity.amenity)).where(models.PropertyAmenity.id == prop_amenity.id))
+    prop_amenity = result.scalars().first()
+    
     return APIResponse(
         success=True,
         message="Property Amenity updated successfully",
@@ -452,6 +462,11 @@ async def update_property_policy(
         
     await db.commit()
     await db.refresh(prop_policy)
+    
+    # Re-fetch with policy loaded
+    result = await db.execute(select(models.PropertyPolicy).options(selectinload(models.PropertyPolicy.policy)).where(models.PropertyPolicy.id == prop_policy.id))
+    prop_policy = result.scalars().first()
+    
     return APIResponse(
         success=True,
         message="Property Policy updated successfully",
@@ -588,7 +603,7 @@ async def read_property_policies(
     property_id: UUID,
     current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
-    result = await db.execute(select(models.PropertyPolicy).where(models.PropertyPolicy.property_id == property_id))
+    result = await db.execute(select(models.PropertyPolicy).options(selectinload(models.PropertyPolicy.policy)).where(models.PropertyPolicy.property_id == property_id))
     policies = result.scalars().all()
     return APIResponse(
         success=True,

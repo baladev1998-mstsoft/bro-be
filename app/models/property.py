@@ -190,7 +190,7 @@ class RoomTariff(Base):
     __table_args__ = (UniqueConstraint('room_type_id', 'tariff_date', name='uq_room_tariff_date'),)
 
 class BlackoutDate(Base):
-    __tablename__ = "blackout\_dates"
+    __tablename__ = "blackout_dates"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     room_type_id = Column(UUID(as_uuid=True), ForeignKey("room_types.id", ondelete="CASCADE"))

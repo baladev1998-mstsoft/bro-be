@@ -414,7 +414,7 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['property_id'], ['properties.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('blackout\\_dates',
+    op.create_table('blackout_dates',
     sa.Column('id', sa.UUID(), nullable=False),
     sa.Column('room_type_id', sa.UUID(), nullable=True),
     sa.Column('start_date', sa.Date(), nullable=False),
@@ -533,7 +533,7 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['room_type_id'], ['room_types.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.drop_table('Test')
+    # op.drop_table('Test')
     # ### end Alembic commands ###
 
 
@@ -551,7 +551,7 @@ def downgrade() -> None:
     op.drop_table('payments')
     op.drop_table('booking_items')
     op.drop_table('booking_addons')
-    op.drop_table('blackout\\_dates')
+    op.drop_table('blackout_dates')
     op.drop_table('room_types')
     op.drop_table('property_policies')
     op.drop_index(op.f('ix_property_assignments_user_id'), table_name='property_assignments')
